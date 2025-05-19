@@ -1,31 +1,48 @@
 package io.github.MSPR4_2025.customers_service.controller;
 
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import io.github.MSPR4_2025.customers_service.entity.Customer;
+import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
+import io.github.MSPR4_2025.customers_service.mapper.CustomerMapper;
+import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
+import io.github.MSPR4_2025.customers_service.model.CustomerDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import io.github.MSPR4_2025.customers_service.service.CustomerService;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@RequiredArgsConstructor
+@RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
     private final CustomerService customerService;
+    private final CustomerMapper customerMapper;
 
+    @GetMapping("/")
+    public ResponseEntity<List<CustomerDto>> listCustomers() {
+        List<CustomerEntity> customerEntities = customerService.getAllCustomers();
 
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-    
-    @GetMapping("/{id}")
-    public Customer getCustomerById(Long id) {
-        return customerService.getCustomerById(id);
+        return ResponseEntity.ok(customerMapper.fromEntities(customerEntities));
     }
 
-    @PostMapping("/register")
-    public Customer createCustomer(Customer customer) {
-        return customerService.createCustomer(customer);
+    @PostMapping("/")
+    public ResponseEntity<CustomerDto> createCustomer(CustomerCreateDto customerCreate) {
+        CustomerEntity customerEntity = customerService.createCustomer(customerCreate);
+
+        return ResponseEntity.ok(customerMapper.fromEntity(customerEntity));
     }
 
+    @GetMapping("/{uid}")
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable UUID uid) {
+        Optional<CustomerEntity> customerEntity = customerService.getCustomerByUid(uid);
+
+        return customerEntity
+                .map(entity ->
+                        ResponseEntity.ok(customerMapper.fromEntity(entity)))
+                .orElseGet(() ->
+                        ResponseEntity.notFound().build());
+    }
 }

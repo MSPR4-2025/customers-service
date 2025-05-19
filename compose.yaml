@@ -1,0 +1,19 @@
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - '5434:5432'
+    env_file:
+      - .env
+    environment:
+      - 'POSTGRES_DB=${DATABASE_NAME}'
+      - 'POSTGRES_USER=${DATABASE_USER}'
+      - 'POSTGRES_PASSWORD=${DATABASE_PASS}'
+  service:
+    image: mspr4-2025/customers-service
+    ports:
+      - '8082:8080'
+    env_file:
+      - .env
+    depends_on:
+      - database
