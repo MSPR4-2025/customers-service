@@ -8,8 +8,14 @@ services:
     ports:
       - '5432:5432'
   service:
+    env_file:
+      - .env
     image: mspr4-2025/customers-service
     ports:
       - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     depends_on:
       - database
