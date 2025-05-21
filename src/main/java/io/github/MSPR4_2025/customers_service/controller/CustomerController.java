@@ -5,13 +5,15 @@ import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
 import io.github.MSPR4_2025.customers_service.mapper.CustomerMapper;
 import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
 import io.github.MSPR4_2025.customers_service.model.CustomerDto;
+import io.github.MSPR4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.MSPR4_2025.customers_service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.github.MSPR4_2025.customers_service.service.CustomerService;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -29,20 +31,39 @@ public class CustomerController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<CustomerDto> createCustomer(CustomerCreateDto customerCreate) {
+    public ResponseEntity<Void> createCustomer(@RequestBody CustomerCreateDto customerCreate) {
         CustomerEntity customerEntity = customerService.createCustomer(customerCreate);
+
+        // Get the url to GET the created customer
+        URI customerUri = MvcUriComponentsBuilder
+                .fromMethodCall(MvcUriComponentsBuilder
+                        .on(CustomerController.class)
+                        .getCustomerByUid(customerEntity.getUid()))
+                .build()
+                .toUri();
+
+        return ResponseEntity.created(customerUri).build();
+    }
+
+    @GetMapping("/{uid}")
+    public ResponseEntity<CustomerDto> getCustomerByUid(@PathVariable UUID uid) {
+        CustomerEntity customerEntity = customerService.getCustomerByUid(uid);
 
         return ResponseEntity.ok(customerMapper.fromEntity(customerEntity));
     }
 
-    @GetMapping("/{uid}")
-    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable UUID uid) {
-        Optional<CustomerEntity> customerEntity = customerService.getCustomerByUid(uid);
+    @PutMapping("/{uid}")
+    public ResponseEntity<Void> updateCustomer(@PathVariable UUID uid,
+                                               @RequestBody CustomerUpdateDto customerUpdate) {
+        customerService.updateCustomer(uid, customerUpdate);
 
-        return customerEntity
-                .map(entity ->
-                        ResponseEntity.ok(customerMapper.fromEntity(entity)))
-                .orElseGet(() ->
-                        ResponseEntity.notFound().build());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{uid}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable UUID uid) {
+        customerService.deleteCustomer(uid);
+
+        return ResponseEntity.ok().build();
     }
 }

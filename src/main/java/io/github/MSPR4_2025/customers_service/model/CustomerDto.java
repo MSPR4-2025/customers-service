@@ -7,6 +7,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CustomerDto extends CustomerCreateDto {
+public class CustomerDto extends CustomerUpdateDto {
     private UUID uid;
 }
