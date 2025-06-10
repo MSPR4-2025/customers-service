@@ -10,7 +10,7 @@ services:
       - 'POSTGRES_USER=${DATABASE_USER}'
       - 'POSTGRES_PASSWORD=${DATABASE_PASS}'
   customers-service:
-    image: mspr4-2025/customers-service
+    image: ghcr.io/mspr4-2025/customers-service
     ports:
       - '8082:8080'
     env_file:
