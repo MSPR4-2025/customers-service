@@ -45,6 +45,8 @@ jobs:
       id-token: write
 
     steps:
+      - run: echo "IMAGE_NAME=${IMAGE_NAME@L}" >> ${GITHUB_ENV}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -65,7 +67,7 @@ jobs:
       - run: chmod +x ./gradlew
 
       - name: Build Docker image
-        run: ./gradlew bootBuildImage --imageName=${{ env.IMAGE_NAME }}
+        run: ./gradlew bootBuildImage --imageName="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
 
       - name: Push Docker image to registry
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
