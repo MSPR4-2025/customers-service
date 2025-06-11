@@ -12,10 +12,15 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  BUILD_AND_PUSH: ${{ github.event_name != 'pull_request' }}
 
 jobs:
   test:
@@ -39,7 +44,7 @@ jobs:
         run: ./gradlew test --tests "*"
 
   build-deploy-docker-image:
-    if: github.event_name != 'pull_request'
+    if: ${{ env.BUILD_AND_PUSH }}
     needs: test
     name: Build and Deploy Docker image
     runs-on: ubuntu-latest
@@ -79,7 +84,7 @@ jobs:
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
   build-javadoc:
-    if: github.event_name != 'pull_request'
+    if: ${{ env.BUILD_AND_PUSH }}
     needs: test
     name: Build Javadoc
     runs-on: ubuntu-latest
