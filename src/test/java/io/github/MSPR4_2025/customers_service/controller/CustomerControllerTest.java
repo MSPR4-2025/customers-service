@@ -23,6 +23,11 @@ public class CustomerControllerTest {
     @Autowired
     WebTestClient client;
 
+    @Test
+    void testShouldFail() {
+        assertThat(false).isTrue();
+    }
+
     @Sql("classpath:/sql/CustomerController/customers.sql")
     @Test
     void testGetCustomerList() {
