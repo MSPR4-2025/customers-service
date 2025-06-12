@@ -9,17 +9,6 @@ on:
       - build.gradle
       - settings.gradle
       - .github/workflows/test-build-deploy.yml
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
-    paths:
-      - src/**
-      - build.gradle
-      - settings.gradle
-      - .github/workflows/test-build-deploy.yml
-
 
 env:
   REGISTRY: ghcr.io
@@ -27,7 +16,6 @@ env:
 
 jobs:
   test:
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.merged == true }}
     name: Test
     runs-on: ubuntu-latest
 
