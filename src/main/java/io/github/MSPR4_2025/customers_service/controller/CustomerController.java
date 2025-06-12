@@ -36,11 +36,11 @@ public class CustomerController {
 
         // Get the url to GET the created customer
         URI customerUri = MvcUriComponentsBuilder
-                .fromMethodCall(MvcUriComponentsBuilder
-                        .on(CustomerController.class)
-                        .getCustomerByUid(customerEntity.getUid()))
-                .build()
-                .toUri();
+            .fromMethodCall(MvcUriComponentsBuilder
+                .on(CustomerController.class)
+                .getCustomerByUid(customerEntity.getUid()))
+            .build()
+            .toUri();
 
         return ResponseEntity.created(customerUri).build();
     }

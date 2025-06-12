@@ -1,13 +1,13 @@
 package io.github.MSPR4_2025.customers_service.service;
 
+import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
 import io.github.MSPR4_2025.customers_service.mapper.CustomerMapper;
 import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
 import io.github.MSPR4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.MSPR4_2025.customers_service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
-import io.github.MSPR4_2025.customers_service.repository.CustomerRepository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class CustomerService {
 
     /**
      * @throws ResponseStatusException when no entity exist with the given uid.
-     * This exception is handled by the controllers, returning a response with the corresponding http status.
+     *                                 This exception is handled by the controllers, returning a response with the corresponding http status.
      */
     public CustomerEntity getCustomerByUid(UUID uid) throws ResponseStatusException {
         Optional<CustomerEntity> entity = customerRepository.findByUid(uid);

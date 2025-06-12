@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @PropertySource("classpath:database.properties")
 public class CustomersServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CustomersServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CustomersServiceApplication.class, args);
+    }
 
 }
