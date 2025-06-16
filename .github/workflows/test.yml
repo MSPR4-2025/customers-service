@@ -1,6 +1,14 @@
 name: Test
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+      - build.gradle
+      - settings.gradle
+      - .github/workflows/test.yml
   pull_request:
 
 jobs:
@@ -23,3 +31,11 @@ jobs:
 
       - name: Test
         run: ./gradlew test --tests "*"
+
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: ${{ !cancelled() }}
+        with:
+          name: Tests
+          path: build/test-results/test/*.xml
+          reporter: java-junit
