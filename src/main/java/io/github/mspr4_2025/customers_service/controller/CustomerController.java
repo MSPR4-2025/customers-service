@@ -1,12 +1,12 @@
-package io.github.MSPR4_2025.customers_service.controller;
+package io.github.mspr4_2025.customers_service.controller;
 
 
-import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
-import io.github.MSPR4_2025.customers_service.mapper.CustomerMapper;
-import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
-import io.github.MSPR4_2025.customers_service.model.CustomerDto;
-import io.github.MSPR4_2025.customers_service.model.CustomerUpdateDto;
-import io.github.MSPR4_2025.customers_service.service.CustomerService;
+import io.github.mspr4_2025.customers_service.entity.CustomerEntity;
+import io.github.mspr4_2025.customers_service.mapper.CustomerMapper;
+import io.github.mspr4_2025.customers_service.model.CustomerCreateDto;
+import io.github.mspr4_2025.customers_service.model.CustomerDto;
+import io.github.mspr4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.mspr4_2025.customers_service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

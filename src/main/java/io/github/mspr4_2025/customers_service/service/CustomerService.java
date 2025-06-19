@@ -1,10 +1,10 @@
-package io.github.MSPR4_2025.customers_service.service;
+package io.github.mspr4_2025.customers_service.service;
 
-import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
-import io.github.MSPR4_2025.customers_service.mapper.CustomerMapper;
-import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
-import io.github.MSPR4_2025.customers_service.model.CustomerUpdateDto;
-import io.github.MSPR4_2025.customers_service.repository.CustomerRepository;
+import io.github.mspr4_2025.customers_service.entity.CustomerEntity;
+import io.github.mspr4_2025.customers_service.mapper.CustomerMapper;
+import io.github.mspr4_2025.customers_service.model.CustomerCreateDto;
+import io.github.mspr4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.mspr4_2025.customers_service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

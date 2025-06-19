@@ -1,6 +1,6 @@
-package io.github.MSPR4_2025.customers_service.repository;
+package io.github.mspr4_2025.customers_service.repository;
 
-import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
+import io.github.mspr4_2025.customers_service.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package io.github.MSPR4_2025.customers_service.model;
+package io.github.mspr4_2025.customers_service.model;
 
 import lombok.Getter;
 import lombok.Setter;

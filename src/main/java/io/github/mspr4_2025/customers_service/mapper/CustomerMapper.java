@@ -1,9 +1,9 @@
-package io.github.MSPR4_2025.customers_service.mapper;
+package io.github.mspr4_2025.customers_service.mapper;
 
-import io.github.MSPR4_2025.customers_service.entity.CustomerEntity;
-import io.github.MSPR4_2025.customers_service.model.CustomerCreateDto;
-import io.github.MSPR4_2025.customers_service.model.CustomerDto;
-import io.github.MSPR4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.mspr4_2025.customers_service.entity.CustomerEntity;
+import io.github.mspr4_2025.customers_service.model.CustomerCreateDto;
+import io.github.mspr4_2025.customers_service.model.CustomerDto;
+import io.github.mspr4_2025.customers_service.model.CustomerUpdateDto;
 import jakarta.annotation.Nullable;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

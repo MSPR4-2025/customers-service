@@ -15,5 +15,8 @@ services:
       - '8082:8080'
     env_file:
       - .env
+    environment:
+      DATABASE_HOST: customers-database
+      DATABASE_PORT: 5432
     depends_on:
       - customers-database
