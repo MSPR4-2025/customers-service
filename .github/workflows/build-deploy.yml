@@ -14,12 +14,9 @@ on:
     branches:
       - main
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   build-deploy-docker-image:
+    if: ${{ github.event_name != 'worflow_run' || github.event.worflow_run.conclusion == 'success' }}
     name: Build and Deploy Docker image
     runs-on: ubuntu-latest
 
@@ -28,6 +25,10 @@ jobs:
       packages: write
       attestations: write
       id-token: write
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
 
     steps:
       - run: echo "IMAGE_NAME=${IMAGE_NAME@L}" >> ${GITHUB_ENV}
@@ -49,8 +50,6 @@ jobs:
           distribution: temurin
           cache: gradle
 
-      - run: chmod +x ./gradlew
-
       - name: Build Docker image
         run: ./gradlew bootBuildImage --imageName="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
 
@@ -58,6 +57,7 @@ jobs:
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
   build-javadoc:
+    if: ${{ github.event_name != 'worflow_run' || github.event.worflow_run.conclusion == 'success' }}
     name: Build Javadoc
     runs-on: ubuntu-latest
 
@@ -74,8 +74,6 @@ jobs:
           java-version: 21
           distribution: temurin
           cache: gradle
-
-      - run: chmod +x ./gradlew
 
       - name: Build javadoc
         run: ./gradlew javadoc
