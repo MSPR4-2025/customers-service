@@ -2,9 +2,11 @@ package io.github.mspr4_2025.customers_service.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CustomerCreateDto {
     private String name;
 
