@@ -9,18 +9,6 @@ services:
       - 'POSTGRES_DB=${DATABASE_NAME}'
       - 'POSTGRES_USER=${DATABASE_USER}'
       - 'POSTGRES_PASSWORD=${DATABASE_PASS}'
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - '5672:5672'
-      - '15672:15672'
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-      RABBITMQ_DEFAULT_VHOST: /
-    volumes:
-    - /tmp/rabbitmq-data:/var/lib/rabbitmq
-
   customers-service:
     image: ghcr.io/mspr4-2025/customers-service
     ports:
@@ -30,13 +18,5 @@ services:
     environment:
       DATABASE_HOST: customers-database
       DATABASE_PORT: 5432
-      spring.rabbitmq.host: rabbitmq
-      spring.rabbitmq.port: 5672
-      spring.rabbitmq.username: guest
-      spring.rabbitmq.password: guest
-      spring.rabbitmq.virtual-host: /
     depends_on:
       - customers-database
-      - rabbitmq
-
-  
