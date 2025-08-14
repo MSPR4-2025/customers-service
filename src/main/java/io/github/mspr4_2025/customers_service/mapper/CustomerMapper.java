@@ -1,9 +1,9 @@
 package io.github.mspr4_2025.customers_service.mapper;
 
 import io.github.mspr4_2025.customers_service.entity.CustomerEntity;
-import io.github.mspr4_2025.customers_service.model.CustomerCreateDto;
-import io.github.mspr4_2025.customers_service.model.CustomerDto;
-import io.github.mspr4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerCreateDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerUpdateDto;
 import jakarta.annotation.Nullable;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -15,7 +15,7 @@ import java.time.ZoneId;
 import java.util.Collection;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public abstract class CustomerMapper {
     // Read value from properties file
     @Value("${app.zoneId:UTC}")

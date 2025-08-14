@@ -1,8 +1,8 @@
 package io.github.mspr4_2025.customers_service.controller;
 
-import io.github.mspr4_2025.customers_service.model.CustomerCreateDto;
-import io.github.mspr4_2025.customers_service.model.CustomerDto;
-import io.github.mspr4_2025.customers_service.model.CustomerUpdateDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerCreateDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerDto;
+import io.github.mspr4_2025.customers_service.model.customer.CustomerUpdateDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
